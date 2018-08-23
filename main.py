@@ -17,7 +17,6 @@ userData = {
     }
 
 
-
 def getDownloadTitle(DlUrl):
     matchTitle = re.findall(r'fs=.*?&', DlUrl)
     matchTitle = ''.join(matchTitle)
