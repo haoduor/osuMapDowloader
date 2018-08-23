@@ -12,8 +12,8 @@ import time
 import env
 
 userData = {
-        'username': 'haoduor',
-        'password': 'theworldbroken'
+        'username': env.value('username'),
+        'password': env.value('userpassword')
     }
 
 
