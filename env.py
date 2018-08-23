@@ -1,8 +1,8 @@
 import yaml
 
 
-def value(value):
+def value(v):
     f = None
     f = open('config.yaml')
     res = yaml.load(f)
-    return res[value]
+    return res[v]

@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 
-import json
 import requests
 from maps import maps
 from urllib import quote, unquote
@@ -10,6 +9,7 @@ import shelve
 import Queue
 import threading
 import time
+import env
 
 userData = {
         'username': 'haoduor',
