@@ -10,6 +10,7 @@ import Queue
 import threading
 import time
 import env
+import localid
 
 userData = {
         'username': env.value('username'),
@@ -41,7 +42,7 @@ def downloadMap(downloadUrl, userCookies):
                 c.flush()
 
                 done = int(50 * tempSize / totalSize)
-                print "%s %d%%" % downloadTitle, int(100 * tempSize / totalSize)
+                print "%s %d%%" % (downloadTitle, int(100 * tempSize / totalSize))
 
 
 def bulidDownloadUrl(mapID):
