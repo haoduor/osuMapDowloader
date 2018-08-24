@@ -41,7 +41,7 @@ def downloadMap(downloadUrl, userCookies):
                 c.flush()
 
                 done = int(50 * tempSize / totalSize)
-                print "%d%%" % int(100 * tempSize / totalSize)
+                print "%s %d%%" % downloadTitle, int(100 * tempSize / totalSize)
 
 
 def bulidDownloadUrl(mapID):
