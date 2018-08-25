@@ -17,6 +17,8 @@ userData = {
         'password': env.value('userpassword')
     }
 
+downloadUrl = env.value('downloadUrl')
+
 
 def getDownloadTitle(DlUrl):
     matchTitle = re.findall(r'fs=.*?&', DlUrl)
@@ -45,8 +47,7 @@ def downloadMap(downloadUrl, userCookies):
                 print "%s %d%%" % (downloadTitle, int(100 * tempSize / totalSize))
 
 
-def bulidDownloadUrl(mapID):
-    downloadUrl = 'https://osu.ppy.sh/beatmapsets/%s/download'
+def buildDownloadUrl(mapID):
     return downloadUrl % mapID
 
 
@@ -63,14 +64,25 @@ def getLoginSession():
     return res
 
 
+def testUserCookies(usercookies):
+    r = requests.get(downloadUrl % '123456', cookies=usercookies)
+    try:
+        a = r.headers['Content-Disposition']
+        return True
+    except:
+        return False
+
+
 if __name__ == '__main__':
     mapID = []
     map = maps()
+    # 要下载的地图队列
     mapQueue = Queue.Queue()
+    # 获取登陆session
     t = getLoginSession()
     userCookies = t.cookies
 
-    if not userCookies:
+    if testUserCookies(userCookies):
         res = getLoginSession()
         db = shelve.open('userData.db')
         db['userCookies'] = res.cookies
@@ -85,7 +97,7 @@ if __name__ == '__main__':
 
     while not mapQueue.empty():
         if threading.active_count() != 5:
-            t = threading.Thread(target=downloadMap, args=(bulidDownloadUrl(mapQueue.get()), userCookies))
+            t = threading.Thread(target=downloadMap, args=(buildDownloadUrl(mapQueue.get()), userCookies))
             t.start()
         else:
             time.sleep(1)

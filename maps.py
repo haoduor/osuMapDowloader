@@ -1,6 +1,7 @@
 import requests
 import env
 
+
 class maps(object):
     def __init__(self):
         self.defaultMapUrl = 'https://osu.ppy.sh/beatmapsets/search?m=0'
