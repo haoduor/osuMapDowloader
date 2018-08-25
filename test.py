@@ -69,6 +69,5 @@ if __name__ == '__main__':
     #         pass
     #
     # print 'end'
-    f = open('config.yaml')
-    r = yaml.load(f)
-    print r
+    a = shelve.open('userData.db')
+    print a['asd']
