@@ -1,13 +1,17 @@
+# -*- encoding:utf-8 -*-
+
 import os
 import re
 import env
 
 
+# 获取本地的map id
 class localmapid():
     def __init__(self):
         self.dic = env.value('local_osu_file')
         self.maps = []
 
+    # 格式化获取的文件夹的名字，剥离出id
     def formatid(self, str):
         str = str.split(' ')
         res = re.search('[0-9]{4,}', str[0])
@@ -15,6 +19,7 @@ class localmapid():
             return None
         return res.group(0)
 
+    # 获取本地的mapid 返回maps[list]
     def getloaclmap(self):
         pathdir = os.listdir(self.dic)
         for i in pathdir:
