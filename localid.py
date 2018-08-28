@@ -21,7 +21,14 @@ class localmapid():
 
     # 获取本地的mapid 返回maps[list]
     def getloaclmap(self):
-        pathdir = os.listdir(self.dic)
+        pathdir = None
+
+        try:
+            pathdir = os.listdir(self.dic)
+        except WindowsError:
+            print "请填写正确的osu路径"
+            exit()
+
         for i in pathdir:
             t = i.split(' ')
             t = self.formatid(t[0])

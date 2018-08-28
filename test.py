@@ -1,3 +1,5 @@
+# -*- encoding:utf-8 -*-
+
 import sys
 import time
 import threading
@@ -11,6 +13,7 @@ import datetime
 import yaml
 from db import data
 from maps import maps
+from localid import localmapid
 
 lock = threading.Lock()
 
@@ -72,13 +75,26 @@ if __name__ == '__main__':
     #
     # print 'end'
     # print('\n'.join([' '.join('%dx%d=%2d' % (x, y, x * y) for x in range(1, y + 1)) for y in range(1, 10)]))
-    mapsData = data('maps.db')
-    map = maps()
-    mapsDataList = []
 
-    for i in range(1, 100):
-        mapsDataList.extend(map.get(i))
-
-    mapsData.insert("Imaps", mapsDataList)
+    # 创建本地数据库
+    # mapsData = data('maps.db')
+    # map = maps()
+    # localmaps = localmapid()
+    # mapsDataList = []
+    # localMapDataList = []
+    #
+    # # for i in range(1, 100):
+    # #     mapsDataList.extend(map.get(i))
+    # localMapDataList.extend(localmaps.getloaclmap())
+    # mapsDataList = mapsData.get("Imaps")
+    # mapsData.insert("Lmaps", localMapDataList)
+    #
+    # mapsDataList = set(mapsDataList)
+    # localMapDataList = set(localMapDataList)
+    #
+    # DL = mapsDataList - localMapDataList
+    #
+    # print len(DL)
+    # print DL
 
     pass
