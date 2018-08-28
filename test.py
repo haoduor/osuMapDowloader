@@ -9,6 +9,8 @@ import os
 import time
 import datetime
 import yaml
+from db import data
+from maps import maps
 
 lock = threading.Lock()
 
@@ -16,10 +18,10 @@ lock = threading.Lock()
 def timer(func):
     def warpper(arg):
         print arg
-        a = datetime.datetime.now
-        c = a()
+        now = datetime.datetime.now
+        before = now()
         res = func(arg)
-        print a() - c
+        print now() - before
         return res
     return warpper
 
@@ -70,4 +72,13 @@ if __name__ == '__main__':
     #
     # print 'end'
     # print('\n'.join([' '.join('%dx%d=%2d' % (x, y, x * y) for x in range(1, y + 1)) for y in range(1, 10)]))
+    mapsData = data('maps.db')
+    map = maps()
+    mapsDataList = []
+
+    for i in range(1, 100):
+        mapsDataList.extend(map.get(i))
+
+    mapsData.insert("Imaps", mapsDataList)
+
     pass
