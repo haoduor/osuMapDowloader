@@ -15,7 +15,7 @@ from db import data
 from maps import maps
 from localid import localmapid
 import log
-import logging
+import time
 
 lock = threading.Lock()
 
@@ -101,8 +101,8 @@ if __name__ == '__main__':
 
     a = maps()
     Imaps = []
-    logger = logging.getLogger('gu')
-    logger.info('asdasdasdasd')
+    logger = log.getlogger()
+    logger.warn('asdasdadas')
     # temp = 0
     # while True:
     #     t = a.get(temp)

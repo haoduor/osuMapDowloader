@@ -1,5 +1,27 @@
-import logging
+# -*- encoding:utf-8 -*-
 
-logging.basicConfig(level=logging.NOTSET, format='[%(asctime)s] %(levelname)s [%(filename)s:%(lineno)d] %(message)s')
+import logging
+import time
+from logging.handlers import TimedRotatingFileHandler
+
+formatter = logging.Formatter('[%(asctime)s]-%(levelname)s-[%(filename)s:%(funcName)s:%(lineno)d]-%(message)s')
+
+logging.basicConfig(level=logging.NOTSET,
+                    format='[%(asctime)s]-%(levelname)s-[%(filename)s:%(funcName)s:%(lineno)d]-%(message)s')
 logger = logging.getLogger('gu')
-logger.info('i am in')
+
+timeStr = time.strftime("%Y%m%d", time.localtime(time.time()))
+logName = 'log_%s.log' % timeStr
+
+fileHandler = TimedRotatingFileHandler(filename=logName,
+                                       when='D',
+                                       interval=1,
+                                       backupCount=20)
+fileHandler.setLevel(logging.NOTSET)
+fileHandler.setFormatter(formatter)
+
+logger.addHandler(fileHandler)
+
+
+def getlogger():
+    return logger
