@@ -1,5 +1,15 @@
 local_osu_file: F:\osu!\Songs
-username: haoduor
-userpassword: theworldbroken
+
+userdata:
+  username: haoduor
+  userpassword: theworldbroken
 
 downloadUrl: https://osu.ppy.sh/beatmapsets/%s/download
+
+sourceUrl: https://osu.ppy.sh/beatmapsets?m=0
+sourceTemp: https://osu.ppy.sh/beatmapsets?
+mapapi: https://osu.ppy.sh/beatmapsets/search?
+
+loginUrl: https://osu.ppy.sh/session
+httpHeader:
+  User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36

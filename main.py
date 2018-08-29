@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- encoding:utf-8 -*-
 
 import requests
 from maps import maps
@@ -11,11 +11,10 @@ import threading
 import time
 import env
 import localid
+import datetime
+from db import data
 
-userData = {
-        'username': env.value('username'),
-        'password': env.value('userpassword')
-    }
+userData = env.value('userdata')
 
 downloadUrl = env.value('downloadUrl')
 
@@ -52,16 +51,14 @@ def buildDownloadUrl(mapID):
 
 
 def getLoginSession():
-    Login_url = 'https://osu.ppy.sh/session'
+    loginUrl = env.value('loginUrl')
 
-    http_header = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
-    }
+    httpHeader = env.value('User-Agent')
 
     s = requests.session()
-    # 获取用户的session
-    res = s.post(Login_url, data=userData, headers=http_header)
-    return res
+    # 获取用户的session id
+    res = s.post(loginUrl, data=userData, headers=httpHeader)
+    return res.cookies
 
 
 def testUserCookies(usercookies):
@@ -74,20 +71,31 @@ def testUserCookies(usercookies):
 
 
 if __name__ == '__main__':
+    # 开启用户的数据库
+    userDB = data('userData.db')
+    # 开启map的数据库
+    mapBD = data('map.db')
+    # 存放要下载的map id
     mapID = []
+    # 从网络获取mpa id
     map = maps()
     # 要下载的地图队列
     mapQueue = Queue.Queue()
-    # 获取登陆session
-    t = getLoginSession()
-    userCookies = t.cookies
+    # 从数据库中获取已经登陆的用户session id
+    userCookies = userDB.get('userCookies')
+    # 从数据库中获取用户session id的过期时间
+    # 过期时间1天
+    userCookiesExpiryTime = userDB.get('userCookiesExpiryTime')
 
-    if testUserCookies(userCookies):
-        res = getLoginSession()
-        db = shelve.open('userData.db')
-        db['userCookies'] = res.cookies
-        userCookies = res.cookies
-        db.close()
+    # 判断是用户session id是否为空，用户session id是否过期
+    if userCookies is None or userCookiesExpiryTime < datetime.datetime.now():
+        # 重新获取用户的cookies
+        userCookies = getLoginSession()
+        # 设置用户cookies的过期时间
+        userCookiesExpiryTime = datetime.datetime.now() + datetime.timedelta(1)
+        # 覆盖数据库
+        userDB.insert('userCookies', userCookies)
+        userDB.insert('userCookiesExpiryTime', userCookiesExpiryTime)
 
     for i in range(100):
         mapID.extend(map.get(i + 1))
