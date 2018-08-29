@@ -14,6 +14,8 @@ import yaml
 from db import data
 from maps import maps
 from localid import localmapid
+import log
+import logging
 
 lock = threading.Lock()
 
@@ -96,5 +98,19 @@ if __name__ == '__main__':
     #
     # print len(DL)
     # print DL
+
+    a = maps()
+    Imaps = []
+    logger = logging.getLogger('gu')
+    logger.info('asdasdasdasd')
+    # temp = 0
+    # while True:
+    #     t = a.get(temp)
+    #     if not t:
+    #         break
+    #     Imaps.extend(t)
+    #     temp += 1
+    #
+    # print len(Imaps)
 
     pass
