@@ -13,9 +13,10 @@ import datetime
 import yaml
 from db import data
 from maps import maps
-from localid import localmapid
+from localmap import localmapid
 import log
 import time
+import sqlite3
 
 lock = threading.Lock()
 
@@ -99,10 +100,6 @@ if __name__ == '__main__':
     # print len(DL)
     # print DL
 
-    a = maps()
-    Imaps = []
-    logger = log.getlogger()
-    logger.warn('asdasdadas')
     # temp = 0
     # while True:
     #     t = a.get(temp)
@@ -112,5 +109,7 @@ if __name__ == '__main__':
     #     temp += 1
     #
     # print len(Imaps)
+    con = sqlite3.connect('beatmap.db')
+    cursor = con.cursor()
 
     pass

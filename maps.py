@@ -53,4 +53,9 @@ class maps(object):
             mapsID.append(res[i]['id'])
         return mapsID
 
+    def setSearch(self, keys):
+        self.buildMapUrl = env.value('searchUrl')
+        self.buildMapUrl += str(keys)
 
+    def headget(self):
+        pass

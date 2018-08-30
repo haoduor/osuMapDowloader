@@ -9,6 +9,7 @@ downloadUrl: https://osu.ppy.sh/beatmapsets/%s/download
 sourceUrl: https://osu.ppy.sh/beatmapsets?m=0
 sourceTemp: https://osu.ppy.sh/beatmapsets?
 mapapi: https://osu.ppy.sh/beatmapsets/search?
+searchUrl: https://osu.ppy.sh/beatmapsets/search?q=
 
 loginUrl: https://osu.ppy.sh/session
 httpHeader:

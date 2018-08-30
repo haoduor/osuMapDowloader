@@ -10,7 +10,7 @@ import Queue
 import threading
 import time
 import env
-import localid
+import localmap
 import datetime
 from db import data
 
@@ -96,6 +96,16 @@ if __name__ == '__main__':
         # 覆盖数据库
         userDB.insert('userCookies', userCookies)
         userDB.insert('userCookiesExpiryTime', userCookiesExpiryTime)
+
+    '''
+        userData.db:
+            userCookies: 用户的cookies
+            userCookiesExpiryTime： cookies的过期时间
+            
+        maps.db:
+            Imaps: 所有从网络获取的id
+            Lmaps: 本地的id
+    '''
 
     for i in range(100):
         mapID.extend(map.get(i + 1))
