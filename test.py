@@ -12,11 +12,11 @@ import time
 import datetime
 import yaml
 from db import data
-from maps import maps
 from localmap import localmapid
 import log
 import time
 import sqlite3
+from model import *
 
 lock = threading.Lock()
 
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     #     temp += 1
     #
     # print len(Imaps)
-    con = sqlite3.connect('beatmap.db')
-    cursor = con.cursor()
-
+    a = maps()
+    b = beatmaps()
+    b.setParent(a)
     pass

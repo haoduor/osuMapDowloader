@@ -4,10 +4,11 @@ import logging
 import time
 from logging.handlers import TimedRotatingFileHandler
 
-formatter = logging.Formatter('[%(asctime)s]-%(levelname)s-[%(filename)s:%(funcName)s:%(lineno)d]-%(message)s')
+formattStr = '[%(asctime)s]-%(levelname)s-[%(filename)s:%(funcName)s:%(lineno)d]:%(message)s'
+formatter = logging.Formatter(formattStr)
 
 logging.basicConfig(level=logging.NOTSET,
-                    format='[%(asctime)s]-%(levelname)s-[%(filename)s:%(funcName)s:%(lineno)d]-%(message)s')
+                    format=formattStr)
 logger = logging.getLogger('gu')
 
 timeStr = time.strftime("%Y%m%d", time.localtime(time.time()))
