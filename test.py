@@ -17,6 +17,7 @@ import log
 import time
 import sqlite3
 from model import *
+from sqlite import sql
 
 lock = threading.Lock()
 
@@ -110,6 +111,6 @@ if __name__ == '__main__':
     #
     # print len(Imaps)
     a = maps()
-    b = beatmaps()
-    b.setParent(a)
+    a = a.__dict__.values()
+    print a
     pass
