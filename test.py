@@ -18,6 +18,12 @@ import time
 import sqlite3
 from model import *
 from sqlite import sql
+import json
+import math
+from spider import mapSpider
+from adapter import mapAdapter
+import copy
+from mapper import *
 
 lock = threading.Lock()
 
@@ -110,7 +116,24 @@ if __name__ == '__main__':
     #     temp += 1
     #
     # print len(Imaps)
-    a = maps()
-    a = a.__dict__.values()
-    print a
+    # f = open('temp.json', 'r')
+    # a = json.load(f)
+    # t = maps().__dict__.keys()
+    # for i in t:
+    #     try:
+    #         print a[9][i]
+    #     except KeyError:
+    #         print i,'error'
+
+    # a = mapSpider()
+    # t = a.getTestData()
+    # with open('temp.json') as f:
+    #     res = json.load(f)
+    #
+    # print id(res)
+    # print type(res)
+    logger = log.getlogger()
+    logger.info('我就是测试一下没啥')
+    t = baseMapper()
+    print t.loadConf()
     pass

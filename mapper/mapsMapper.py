@@ -22,3 +22,6 @@ class mapsMapper():
 
     def insertMaps(self, maps):
         pass
+
+    def getName(self):
+        print self.__class__.__name__
