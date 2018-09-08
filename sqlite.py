@@ -7,14 +7,17 @@ import env
 # 类可以获取sql的指针对象
 
 
-class sql():
+class sql:
     sql_name = env.value('sqlname')
     _cur = None
 
     def __init__(self):
-        self.conn = sqlite3.connect(self.sql_name)
-        self._cur = self.conn.cursor()
+        self._conn = sqlite3.connect(self.sql_name)
+        self._cur = self._conn.cursor()
         pass
 
     def getCur(self):
         return self._cur
+
+    def getConn(self):
+        return self._conn

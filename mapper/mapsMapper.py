@@ -1,7 +1,7 @@
 # -*- encoding:utf-8 -*-
 
 from model import maps
-from sqlite import sql
+from baseMapper import baseMapper
 
 '''
  完成maps的数据库映射
@@ -13,12 +13,10 @@ from sqlite import sql
  selectByTime
 '''
 
-cur = sql().getCur()
 
-
-class mapsMapper():
+class mapsMapper(baseMapper):
     def __init__(self):
-        pass
+        baseMapper.__init__(self, maps())
 
     def insertMaps(self, maps):
         pass

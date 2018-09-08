@@ -1,1 +1,4 @@
-id: id
+insert: insert into table_name (keys) VALUES (values)
+select: select * from table_name where id = (values)
+update: update table_name set (keys) where id = (values)
+delete: delete from table_name where id = (values)

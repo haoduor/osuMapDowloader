@@ -134,6 +134,9 @@ if __name__ == '__main__':
     # print type(res)
     logger = log.getlogger()
     logger.info('我就是测试一下没啥')
-    t = baseMapper()
-    print t.loadConf()
-    pass
+    logger.info('测试baseMapper的insert')
+    a = maps(814994, '2018-07-16T01:39:16+00:00', '2018-08-20T23:53:09+00:00',
+             '2018-08-29T00:21:41+00:00', '僕のヒーローアカデミア')
+    t = maps()
+    mapper = baseMapper(t)
+    mapper.insertModel(a)
