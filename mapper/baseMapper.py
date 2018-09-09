@@ -42,21 +42,49 @@ class baseMapper:
 
     def insertModel(self, model):
         if not isinstance(model, self.baseModel.__class__):
-            # TODO 补全异常
             logger.warn("与初始模型不是同一模型")
-            raise Exception
-        com = self.baseRelation['insert']
-        com = com.replace('table_name', model.__class__.__name__)
+            raise TypeError
+        command = self.baseRelation['insert']
+        command = command.replace('table_name', model.__class__.__name__)
         key = self.buildKey(self.relation.values())
         value = self.buildValue(model.__dict__.values())
-        com = com.replace('keys', key)
-        com = com.replace('values', value)
-        print com
+        command = command.replace('keys', key)
+        command = command.replace('values', value)
+        print command
 
-        self.cur.execute(com)
+        self.cur.execute(command)
         self.conn.commit()
 
-        self.cur.close()
+    def insertModels(self, models):
+        if not isinstance(models, list) and not isinstance(models, tuple):
+            logger.warn('必须使用可迭代类型')
+            raise TypeError
+        elif len(models) == 0:
+            logger.warn('不能使用长度为0的iter')
+            raise ValueError
 
-    def insertModels(self, model):
-        pass
+        command = self.baseRelation['insert']
+        res = []
+        for i in models:
+            t = []
+            for s in i.__dict__.values():
+                if isinstance(s, str):
+                    s = s.decode('utf-8')
+                t.append(s)
+            res.append(t)
+
+        key = self.buildKey(self.relation.values())
+        value = ''
+        value += '?,' * len(self.relation)
+        value = value[:-1]
+
+        command = command.replace('table_name', self.baseModel.__class__.__name__)
+        command = command.replace('keys', key)
+        command = command.replace('values', value)
+
+        self.cur.executemany(command, res)
+        self.conn.commit()
+
+
+
+

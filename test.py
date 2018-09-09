@@ -137,6 +137,9 @@ if __name__ == '__main__':
     logger.info('测试baseMapper的insert')
     a = maps(814994, '2018-07-16T01:39:16+00:00', '2018-08-20T23:53:09+00:00',
              '2018-08-29T00:21:41+00:00', '僕のヒーローアカデミア')
+    aa = maps(622109, '2017-06-04T04:19:43+00:00', '2018-08-27T13:57:38+00:00',
+              '2018-08-28T15:00:10+00:00', 'ギルティクラウン')
     t = maps()
     mapper = baseMapper(t)
-    mapper.insertModel(a)
+    print isinstance([a, aa], list)
+    mapper.insertModels([a, aa])
